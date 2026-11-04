@@ -82,6 +82,18 @@ export async function PATCH(
         throw new Error('Tamamlanmış sipariş geriye dönük işleme veya bekleme durumuna alınamaz.');
       }
 
+      // Concurrency Lock: Atomik olarak sadece mevcut durumdaysa yeni duruma geçir
+      const transitionResult = await tx.order.updateMany({
+        where: { id: params.id, status: currentOrder.status },
+        data: { status: newStatus },
+      });
+
+      if (transitionResult.count === 0) {
+        // Eşzamanlı başka bir istek bu geçişi zaten tamamladı (Idempotent Concurrency Safe)
+        const refreshed = await tx.order.findUnique({ where: { id: params.id } });
+        return refreshed || currentOrder;
+      }
+
       const isCancelling = newStatus === 'CANCELLED' && currentOrder.status !== 'CANCELLED';
       const isReactivating = currentOrder.status === 'CANCELLED' && newStatus !== 'CANCELLED';
 
@@ -152,10 +164,9 @@ export async function PATCH(
         }
       }
 
-      // 7. Sipariş durumunu güncelle
-      const order = await tx.order.update({
+      // 7. Güncel siparişi getir
+      const order = await tx.order.findUniqueOrThrow({
         where: { id: params.id },
-        data: { status: newStatus },
       });
 
       // 8. Aktivite günlüğü kaydet

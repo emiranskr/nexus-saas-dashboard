@@ -3,23 +3,24 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id           String        @id @default(cuid())
-  email        String        @unique
-  name         String
-  passwordHash String
-  role         String        @default("USER") // "ADMIN" | "USER"
-  status       String        @default("ACTIVE") // "ACTIVE" | "INACTIVE" | "SUSPENDED"
-  avatarUrl    String?
-  orders       Order[]
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String
+  passwordHash  String
+  role          String         @default("USER") // "ADMIN" | "USER"
+  status        String         @default("ACTIVE") // "ACTIVE" | "INACTIVE" | "SUSPENDED"
+  avatarUrl     String?
+  orders        Order[]
   notifications Notification[]
-  activityLogs ActivityLog[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  activityLogs  ActivityLog[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 
   @@index([email])
   @@index([role])
@@ -74,11 +75,11 @@ model Order {
 }
 
 model OrderItem {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   orderId   String
-  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   productId String
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
   quantity  Int
   unitPrice Float
   subtotal  Float
