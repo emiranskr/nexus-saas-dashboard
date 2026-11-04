@@ -1,5 +1,7 @@
 # Nexus SaaS — Enterprise Management & Analytics Platform
 
+[![Live Demo](https://img.shields.io/badge/Demo-Live_on_Vercel-success?style=for-the-badge&logo=vercel&logoColor=white)](https://nexus-saas-dashboard-rho.vercel.app)
+[![Database](https://img.shields.io/badge/Database-Neon_PostgreSQL-00E599?style=for-the-badge&logo=postgresql&logoColor=white)](https://neon.com)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -9,7 +11,10 @@
 [![Vitest](https://img.shields.io/badge/Vitest-89_Passed-FCC72B?style=for-the-badge&logo=vitest&logoColor=black)](https://vitest.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
-An enterprise-grade, full-stack SaaS administrative dashboard and business intelligence platform built with **Next.js 14 App Router**, **TypeScript**, **Tailwind CSS**, **Prisma ORM**, and **NextAuth.js**.
+> 🚀 **Live Production Deployment:** [https://nexus-saas-dashboard-rho.vercel.app](https://nexus-saas-dashboard-rho.vercel.app)  
+> 📦 **GitHub Repository:** [https://github.com/emiranskr/nexus-saas-dashboard](https://github.com/emiranskr/nexus-saas-dashboard)
+
+An enterprise-grade, full-stack SaaS administrative dashboard and business intelligence platform built with **Next.js 14 App Router**, **TypeScript**, **Tailwind CSS**, **Prisma ORM**, **Neon Serverless PostgreSQL**, and **NextAuth.js**.
 
 Nexus is engineered as a fully functional, production-ready system rather than a static presentation mockup. Every metric, chart bucket, stock adjustment, and order transition is executed against an ACID-compliant relational database with atomic transactions, strict role-based access control (RBAC), and automated testing suites.
 
